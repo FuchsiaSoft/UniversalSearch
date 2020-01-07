@@ -1,8 +1,49 @@
-﻿@{
+﻿@using UniSearch.Models;
+
+@model SearchViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome to uni-search prototype</h1>
+        <div style="margin-bottom:50px;"></div>
+        <p>
+            This website is a quick demo of the idea of universal search for a contact centre
+            that has multiple back-office systems.
+            The idea is that a single search is performed here for some basic info, and a read-only
+            set of results is returned that will at least confirm whether data is present in a given
+            back-office system.
+            The searching for each is done by different and specific components, 
+            <strong>which know how to contextualise and format their results in a unified way.</strong>
+        </p>
+        <p>
+            This demo just makes up some random data to try and illustrate the concept of
+            contextualising back-office data for the purposes of an aggregated search.
+        </p>
+        <p class="display-4">
+            Fill out the form below and give it a try!
+        </p>
+        <div style="margin-bottom:150px;"></div>
+        <form asp-controller="Search" asp-action="DoSearch">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <input asp-for="FirstName" class="form-control form-control-lg" placeholder="First Name" />
+                </div>
+                <div class="form-group col-6">
+                    <input asp-for="LastName" class="form-control form-control-lg" placeholder="Last Name" />
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <input asp-for="Address" class="form-control form-control-lg" placeholder="Address" />
+                </div>
+            </div>
+            <input type="submit" class="btn btn-primary btn-block" value="Do Search" />
+        </form>
+
+
+
+    </div>

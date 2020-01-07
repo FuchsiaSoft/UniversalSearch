@@ -1,0 +1,44 @@
+﻿@using UniSearch.Models;
+
+@model IEnumerable<SourceViewModel>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Search Results</h1>
+</div>
+
+<div class="row">
+    @foreach (var source in Model)
+    {
+        <div class="col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@source.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@source.LeadText</h6>
+                    <div class="overflow-auto" style="height:300px;">
+                        @foreach (var result in source.Results.OrderByDescending(o=>o.Stamp))
+                        {
+                            if (!string.IsNullOrWhiteSpace(result.Link))
+                            {
+                                <p class="result-text">
+                                    <strong>@result.EntityMatch</strong> <a href="@result.Link" class="card-link">@result.HeaderFollowText</a>
+                                </p>
+                            }
+                            else
+                            {
+                                <p class="result-text"><strong>@result.EntityMatch</strong> @result.HeaderFollowText</p>
+                            }
+                            <p class="result-lead"><small>@result.Stamp.ToString("dd MMM yyyy") | @result.LeadText</small></p>
+                            <hr />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
